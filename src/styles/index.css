@@ -13,6 +13,7 @@
 #list {
     width: 300px;
 }
+
 ul {
     list-style: none;
     padding-left: 0px;
@@ -23,10 +24,38 @@ ul {
 h1 {
     font-size: 100px;
 }
+
 input {
     padding-left: 20px;
     border: none;
+    border-width: 0px;
+}
+
+.form-control {
+    border: none;
+    border-radius: 0px;
 }
 
 .card {
-    box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);}
+    box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
+}
+
+input:focus,
+select:focus,
+textarea:focus,
+button:focus {
+    outline: 0;
+}
+
+input:focus-visible,
+select:focus-visible,
+textarea:focus-visible,
+button:focus-visible {
+    outline: 0;
+}
+.listDelete {
+    visibility: hidden;
+} 
+.listDelete:hover {
+    visibility: visible;
+}

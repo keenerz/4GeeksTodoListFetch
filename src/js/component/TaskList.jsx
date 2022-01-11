@@ -31,7 +31,19 @@ const TaskList = () => {
 							<li
 								className="d-flex justify-content-between ps-3 pe-4 py-2 border-end border-start border-bottom text-muted fw-light fs-5"
 								key={i}>
-								{singleTask}
+								{singleTask}{" "}
+								<div
+									className="listDelete"
+									onClick={() =>
+										setList(
+											list.filter(
+												(deleteTask) =>
+													deleteTask !== singleTask
+											)
+										)
+									}>
+									x
+								</div>
 							</li>
 						);
 					})}
