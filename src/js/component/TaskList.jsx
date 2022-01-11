@@ -13,14 +13,15 @@ const TaskList = () => {
 	};
 
 	return (
-		<div className="d-inline justify-content-center">
-			<div className="input-group border">
+		<div className="d-inline justify-content-center card">
+			<div className="input-group fw-light">
 				<input
-					className="form-control"
+					className="form-control fw-light ps-3"
 					type="text"
 					placeholder="To Do List"
 					onChange={(event) => setTask(event.target.value)}
 					onKeyDown={(e) => handleInput(e)}
+					value={task}
 				/>
 			</div>
 			<div className="w-100 h-100" id="list">
@@ -28,14 +29,14 @@ const TaskList = () => {
 					{list.map((singleTask, i) => {
 						return (
 							<li
-								className="d-flex justify-content-between ps-5 pe-4 py-2 border-end border-start border-bottom text-muted fw-light fs-5"
+								className="d-flex justify-content-between ps-3 pe-4 py-2 border-end border-start border-bottom text-muted fw-light fs-5"
 								key={i}>
 								{singleTask}
 							</li>
 						);
 					})}
 				</ul>
-				<div className="ps-5 py-1 border-end border-start border-bottom text-muted fw-light fs-6 text-start">
+				<div className="ps-3 py-1 border-end border-start border-bottom text-muted fw-light fs-6 text-start card-footer">
 					<span>{list.length} Items</span>
 				</div>
 			</div>
