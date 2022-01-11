@@ -23,7 +23,7 @@ const TaskList = () => {
 					onKeyDown={(e) => handleInput(e)}
 				/>
 			</div>
-			<div className="w-100 h-100">
+			<div className="w-100 h-100" id="list">
 				<ul>
 					{list.map((singleTask, i) => {
 						return (
