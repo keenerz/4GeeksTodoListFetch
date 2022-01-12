@@ -11,7 +11,7 @@ const Home = () => {
 				<h1 className="fw-light title opacity-25">todos</h1>
 			</div>
 			<div
-				className="row px-5 d-flex justify-content-center card"
+				className="row px-5 d-flex justify-content-center"
 				id="outerTask">
 				<div
 					className="text-center d-flex justify-content-center"

@@ -4,12 +4,15 @@ const TaskList = () => {
 	let [task, setTask] = useState("");
 	let [list, setList] = useState([]);
 	let [place, setPlace] = useState("No tasks, add a task");
+	let [footer, setFooter] = useState("items");
 
 	const handleInput = (e) => {
 		if (e.keyCode == 13 && e.target.value != "") {
 			setTask(e.target.value);
 			setList([...list, task]);
 			setTask("");
+			getList(list.length);
+			getFooter(list.length);
 		}
 	};
 
@@ -20,27 +23,36 @@ const TaskList = () => {
 			setPlace("No tasks, add a task");
 		}
 	};
+
+	const getFooter = () => {
+		if (list.length === 0) {
+			setFooter("item");
+		} else {
+			setFooter("items");
+		}
+	};
+
 	return (
-		<div className="d-inline justify-content-center w-100 card-body">
-			<div className="input-group fw-light">
+		<div className="d-inline justify-content-center w-100" id="whole">
+			<div className="fw-light">
 				<input
-					className="form-control fw-light ps-3 card-header"
+					className="form-control fw-light ps-5"
+					id="inputZone"
 					type="text"
 					placeholder={place}
 					onChange={(event) => setTask(event.target.value)}
 					onKeyDown={(e) => {
 						handleInput(e);
-						getList(list.length);
 					}}
 					value={task}
 				/>
 			</div>
-			<div className="list-group-flush" id="list">
+			<div id="list">
 				<ul>
 					{list.map((singleTask, i) => {
 						return (
 							<li
-								className="d-flex justify-content-between ps-3 py-2 text-muted fw-light fs-5 list-group-item"
+								className="d-flex justify-content-between ps-5 py-2 text-muted fw-light fs-5"
 								key={i}>
 								{singleTask}{" "}
 								<div
@@ -52,7 +64,9 @@ const TaskList = () => {
 													deleteTask !== singleTask
 											)
 										);
+										console.log(list.length);
 										getList(list.length);
+										getFooter(list.length);
 									}}>
 									x
 								</div>
@@ -60,8 +74,10 @@ const TaskList = () => {
 						);
 					})}
 				</ul>
-				<div className="ps-2 py-1 border-end border-start border-bottom text-muted fw-light text-start card-footer">
-					<span>{list.length} Items</span>
+				<div className="ps-3 py-1 fw-light text-start" id="footer">
+					<span>
+						{list.length} {footer} left
+					</span>
 				</div>
 			</div>
 		</div>
