@@ -74,8 +74,8 @@ const TaskList = () => {
 						);
 					})}
 				</ul>
-				<div className="ps-3 py-1 fw-light text-start" id="footer">
-					<span>
+				<div className="ps-3 py-2 fw-light text-start" id="footer">
+					<span id="footerText">
 						{list.length} {footer} left
 					</span>
 				</div>
