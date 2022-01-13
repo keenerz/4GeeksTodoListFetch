@@ -68,9 +68,8 @@ const TaskList = () => {
 												(deleteTask, j) => j !== i
 											)
 										);
-										console.log(list.length);
-										getList([...list, task].length);
-										getFooter([...list, task].length);
+										getList();
+										getFooter();
 									}}>
 									x
 								</div>
