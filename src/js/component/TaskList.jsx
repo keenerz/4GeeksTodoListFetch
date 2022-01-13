@@ -6,6 +6,7 @@ const TaskList = () => {
 	let [place, setPlace] = useState("No tasks, add a task");
 	let [footer, setFooter] = useState("items");
 
+	// Input and mechanics
 	const handleInput = (e) => {
 		if (e.keyCode === 13 && e.target.value != "") {
 			if (e.target.value.trim() === "") {
@@ -13,10 +14,11 @@ const TaskList = () => {
 				setTask("");
 			} else {
 				setTask(e.target.value);
-				setList([...list, task]);
+				setList([...list, { label: task, done: false }]);
 				setTask("");
-				getList([...list, task].length);
-				getFooter([...list, task].length);
+				getList([...list, { label: task, done: false }].length);
+				getFooter([...list, { label: task, done: false }].length);
+				saveTodoList([...list, { label: task, done: false }]);
 			}
 		}
 	};
@@ -35,6 +37,34 @@ const TaskList = () => {
 		} else {
 			setFooter("items");
 		}
+	};
+
+	//Fetch Integration
+	const getTodos = async () => {
+		const options = {
+			method: "GET",
+		};
+		const response = await fetch(
+			"https://assets.breatheco.de/apis/fake/todos/user/keenerz",
+			options
+		);
+		setList(await response.json());
+	};
+
+	useEffect(() => {
+		getTodos();
+	}, []);
+
+	const saveTodoList = async (newTodos) => {
+		const options = {
+			method: "PUT",
+			body: JSON.stringify(newTodos),
+			headers: { "content-type": "application/json" },
+		};
+		const response = await fetch(
+			"https://assets.breatheco.de/apis/fake/todos/user/keenerz",
+			options
+		);
 	};
 
 	return (
@@ -59,11 +89,16 @@ const TaskList = () => {
 							<li
 								className="d-flex justify-content-between ps-5 py-2 text-muted fw-light fs-5"
 								key={i}>
-								{singleTask}{" "}
+								{singleTask.label}{" "}
 								<div
 									className="listDelete"
 									onClick={() => {
 										setList(
+											list.filter(
+												(deleteTask, j) => j !== i
+											)
+										);
+										saveTodoList(
 											list.filter(
 												(deleteTask, j) => j !== i
 											)
