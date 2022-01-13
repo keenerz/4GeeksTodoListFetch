@@ -3,8 +3,6 @@ import React, { useState, useEffect } from "react";
 const TaskList = () => {
 	let [task, setTask] = useState("");
 	let [list, setList] = useState([]);
-	let [place, setPlace] = useState("No tasks, add a task");
-	let [footer, setFooter] = useState("items");
 
 	// Input and mechanics
 	const handleInput = (e) => {
@@ -16,26 +14,8 @@ const TaskList = () => {
 				setTask(e.target.value);
 				setList([...list, { label: task, done: false }]);
 				setTask("");
-				getList([...list, { label: task, done: false }].length);
-				getFooter([...list, { label: task, done: false }].length);
 				saveTodoList([...list, { label: task, done: false }]);
 			}
-		}
-	};
-
-	const getList = () => {
-		if (list.length > -1) {
-			setPlace("What needs to be done?");
-		} else {
-			setPlace("No tasks, add a task");
-		}
-	};
-
-	const getFooter = () => {
-		if (list.length <= 0) {
-			setFooter("item");
-		} else {
-			setFooter("items");
 		}
 	};
 
@@ -74,7 +54,11 @@ const TaskList = () => {
 					className="form-control fw-light ps-5"
 					id="inputZone"
 					type="text"
-					placeholder={place}
+					placeholder={
+						list.length === 0
+							? "No tasks, add a task"
+							: "What needs to be done?"
+					}
 					onChange={(event) => setTask(event.target.value)}
 					onKeyDown={(e) => {
 						handleInput(e);
@@ -103,8 +87,6 @@ const TaskList = () => {
 												(deleteTask, j) => j !== i
 											)
 										);
-										getList();
-										getFooter();
 									}}>
 									x
 								</div>
@@ -114,7 +96,8 @@ const TaskList = () => {
 				</ul>
 				<div className="ps-3 py-2 fw-light text-start" id="footer">
 					<span id="footerText">
-						{list.length} {footer} left
+						{list.length} {list.length === 1 ? "item" : "items"}{" "}
+						left
 					</span>
 				</div>
 			</div>
