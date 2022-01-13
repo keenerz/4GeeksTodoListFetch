@@ -36,6 +36,7 @@ const TaskList = () => {
 	}, []);
 
 	const saveTodoList = async (newTodos) => {
+		console.log(newTodos);
 		const options = {
 			method: "PUT",
 			body: JSON.stringify(newTodos),
@@ -45,7 +46,16 @@ const TaskList = () => {
 			"https://assets.breatheco.de/apis/fake/todos/user/keenerz",
 			options
 		);
+		console.log(JSON.stringify(newTodos));
 	};
+
+	// const uploadDone = async () => {
+	// 	const options = {
+	// 		method: "PUT",
+	// 		body: JSON.stringify(newTodos),
+	// 		headers: { "content-type": "application/json" },
+	// 	}
+	// }
 
 	return (
 		<div className="d-inline justify-content-center w-100" id="whole">
@@ -71,24 +81,37 @@ const TaskList = () => {
 					{list.map((singleTask, i) => {
 						return (
 							<li
-								className="d-flex justify-content-between ps-5 py-2 text-muted fw-light fs-5"
+								className={`d-flex justify-content-between ps-5 py-2 text-muted fw-light fs-5 ${
+									singleTask.done ? "done" : ""
+								}`}
 								key={i}>
 								{singleTask.label}{" "}
-								<div
-									className="listDelete"
-									onClick={() => {
-										setList(
-											list.filter(
-												(deleteTask, j) => j !== i
-											)
-										);
-										saveTodoList(
-											list.filter(
-												(deleteTask, j) => j !== i
-											)
-										);
-									}}>
-									x
+								<div className="theButtons">
+									<div
+										className="listDone"
+										onClick={() => {
+											let newList = [...list];
+											newList[i].done = !newList[i].done;
+											setList(newList);
+										}}>
+										<i className="fas fa-check"></i>
+									</div>
+									<div
+										className="listDelete"
+										onClick={() => {
+											setList(
+												list.filter(
+													(deleteTask, j) => j !== i
+												)
+											);
+											saveTodoList(
+												list.filter(
+													(deleteTask, j) => j !== i
+												)
+											);
+										}}>
+										<i className="fas fa-trash"></i>
+									</div>
 								</div>
 							</li>
 						);

@@ -48,10 +48,26 @@ button:focus-visible {
 }
 .listDelete {
     visibility: hidden;
-    color: rgba(240, 123, 123, 0.767)
+    color: rgba(240, 123, 123, 0.767);
+    margin-left: 10px;
 } 
-li:hover > .listDelete{
+li:hover > .theButtons > .listDelete{
     visibility: visible;
+}
+.listDone {
+    visibility: hidden;
+    color: lightgreen
+}
+li:hover > .theButtons > .listDone{
+    visibility: visible;
+}
+
+.listDelete:hover {
+    color: rgb(253, 0, 0, 0.767);
+}
+
+.listDone:hover {
+    color:green
 }
 
 input, textarea, select {
@@ -95,4 +111,13 @@ li {
 }
 #inputZone {
     height: 50px;
+}
+
+.done {
+    text-decoration: line-through;
+}
+.theButtons {
+    float: right;
+    visibility: hidden;
+    display: flex;
 }
