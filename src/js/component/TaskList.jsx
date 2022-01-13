@@ -46,16 +46,8 @@ const TaskList = () => {
 			"https://assets.breatheco.de/apis/fake/todos/user/keenerz",
 			options
 		);
-		console.log(JSON.stringify(newTodos));
+		console.log(JSON.stringify(newTodos.done));
 	};
-
-	// const uploadDone = async () => {
-	// 	const options = {
-	// 		method: "PUT",
-	// 		body: JSON.stringify(newTodos),
-	// 		headers: { "content-type": "application/json" },
-	// 	}
-	// }
 
 	return (
 		<div className="d-inline justify-content-center w-100" id="whole">
@@ -93,6 +85,7 @@ const TaskList = () => {
 											let newList = [...list];
 											newList[i].done = !newList[i].done;
 											setList(newList);
+											saveTodoList(newList);
 										}}>
 										<i className="fas fa-check"></i>
 									</div>
