@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 
 const TaskList = () => {
 	let [task, setTask] = useState("");
@@ -7,12 +7,17 @@ const TaskList = () => {
 	let [footer, setFooter] = useState("items");
 
 	const handleInput = (e) => {
-		if (e.keyCode == 13 && e.target.value != "") {
-			setTask(e.target.value);
-			setList([...list, task]);
-			setTask("");
-			getList(list.length);
-			getFooter(list.length);
+		if (e.keyCode === 13 && e.target.value != "") {
+			if (e.target.value.trim() === "") {
+				alert("Error 404: words not found");
+				setTask("");
+			} else {
+				setTask(e.target.value);
+				setList([...list, task]);
+				setTask("");
+				getList([...list, task].length);
+				getFooter([...list, task].length);
+			}
 		}
 	};
 
@@ -25,7 +30,7 @@ const TaskList = () => {
 	};
 
 	const getFooter = () => {
-		if (list.length === 0) {
+		if (list.length <= 0) {
 			setFooter("item");
 		} else {
 			setFooter("items");
@@ -60,13 +65,12 @@ const TaskList = () => {
 									onClick={() => {
 										setList(
 											list.filter(
-												(deleteTask) =>
-													deleteTask !== singleTask
+												(deleteTask, j) => j !== i
 											)
 										);
 										console.log(list.length);
-										getList(list.length);
-										getFooter(list.length);
+										getList([...list, task].length);
+										getFooter([...list, task].length);
 									}}>
 									x
 								</div>
